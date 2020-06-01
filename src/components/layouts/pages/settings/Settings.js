@@ -32,7 +32,7 @@ function Settings(props) {
 
     if (jobId) {
         // Once job is initialized and we know its ID redirect to status page to track its progress
-        return <Redirect push to={AppPages.STATUS.url(jobId)} />;
+        return <Redirect push to={AppPages.JOBS.STATUS.url(jobId)} />;
     }
 
     return (

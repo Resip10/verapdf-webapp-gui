@@ -72,7 +72,7 @@ function JobStatus({ jobStatus, percentage, steps, errorMessage, complete }) {
 
         case JOB_STATUS.FINISHED:
             if (complete) {
-                return <Redirect to={AppPages.RESULTS.url(jobId)} />;
+                return <Redirect to={AppPages.JOBS.RESULTS.url(jobId)} />;
             }
 
         // eslint-disable-next-line no-fallthrough
@@ -87,7 +87,7 @@ function JobStatus({ jobStatus, percentage, steps, errorMessage, complete }) {
 
 function StatusPage({ children }) {
     return (
-        <WizardStep stepIndex={AppPages.STATUS.route} className="job-status">
+        <WizardStep stepIndex={AppPages.JOBS.STATUS.route} className="job-status">
             {children}
         </WizardStep>
     );

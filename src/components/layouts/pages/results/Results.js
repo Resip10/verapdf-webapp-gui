@@ -28,7 +28,7 @@ function Results({ jobStatus, taskStatus, compliant, onBackClick }) {
     const forwardButton = useMemo(
         () => ({
             label: 'Inspect errors',
-            to: AppPages.INSPECT.url(jobId),
+            to: AppPages.JOBS.INSPECT.url(jobId),
             disabled: compliant,
         }),
         [compliant, jobId]
@@ -38,11 +38,11 @@ function Results({ jobStatus, taskStatus, compliant, onBackClick }) {
         return <Redirect to={AppPages.NOT_FOUND} />;
     }
     if (jobStatus !== JOB_STATUS.FINISHED || taskStatus !== TASK_STATUS.FINISHED) {
-        return <Redirect to={AppPages.STATUS.url(jobId)} />;
+        return <Redirect to={AppPages.JOBS.STATUS.url(jobId)} />;
     }
 
     return (
-        <WizardStep stepIndex={AppPages.RESULTS.route} className="results">
+        <WizardStep stepIndex={AppPages.JOBS.RESULTS.route} className="results">
             <Summary />
             <PageNavigation back={backButton} forward={forwardButton} />
         </WizardStep>
