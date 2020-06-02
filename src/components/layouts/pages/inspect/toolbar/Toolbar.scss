@@ -1,0 +1,49 @@
+@import "../../../../variables";
+@import "../../../../mixins";
+
+.toolbar {
+  @include inspect-toolbar;
+  background: $color-black--25;
+  box-shadow: $box-shadow--basic;
+  width: 100%;
+  position: sticky;
+  top: 75px;
+  z-index: $top-element-index;
+
+  section {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+
+    &.toolbar__center {
+      flex-grow: 2;
+    }
+  }
+
+  &__center {
+    justify-content: center;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    h1 {
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__end {
+    justify-content: flex-end;
+  }
+
+  .tree-button {
+    display: flex;
+    margin-right: 10px;
+    &__badge > span {
+      padding: 0 2px;
+      border: 2px solid #bfbfbf;
+      top: 4px;
+    }
+  }
+}

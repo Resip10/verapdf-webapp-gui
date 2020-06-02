@@ -12,3 +12,13 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin inspect-toolbar {
+  height: 40px;
+  box-sizing: border-box;
+  padding: 5px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

@@ -273,3 +273,18 @@ export const toggleSettingsCheckbox = (component, checked) => {
     component.update();
     expect(component.find(Checkbox).props().checked).toBe(checked);
 };
+
+export const passValidationProcess = async (store, component) => {
+    await storeFile(component, store);
+
+    // Validate file
+    moveNext(component);
+    expect(createJob).toHaveBeenCalledTimes(1);
+    await waitFor(store, stepFinished('JOB_CREATE'));
+    // ...
+    // long validation process
+    // ...
+    await waitFor(store, stepFinished('VALIDATION_RESULT_DOWNLOAD'));
+    expect(getFileContent).toHaveBeenCalledTimes(1);
+    component.update();
+};

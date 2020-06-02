@@ -1,4 +1,21 @@
+@import "../../../variables";
+
 .inspect {
+  transition: $cubic;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  &._open {
+    @media all and (min-width: 850px) {
+      width: calc(100% - #{$drawer-width});
+      margin-left: $drawer-width;
+    }
+  }
+
+  &__document {
+    padding: 20px 0;
+  }
 }

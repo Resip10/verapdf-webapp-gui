@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Document, Page, pdfjs } from 'react-pdf';
+import classNames from 'classnames';
 
 import { getPdfFiles } from '../../../../store/pdfFiles/selectors';
+import DrawerLayout from '../../../shared/drawerLayout/DrawerLayout';
+import Toolbar from './toolbar/Toolbar';
 
 import './Inspect.scss';
 
 const { PUBLIC_URL } = process.env;
 pdfjs.GlobalWorkerOptions.workerSrc = `${PUBLIC_URL}/pdf.worker.js`;
 
-function Inspect(props) {
-    const { file } = props;
+const LIST_HEADER = 'Errors overview';
 
+function Inspect({ file }) {
+    const [pdfName, setPdfName] = useState('');
+    const [treeOpened, setTreeOpened] = useState(false);
     const [pageNumber] = useState(1);
+    const onTreeToggle = useCallback(() => setTreeOpened(!treeOpened), [treeOpened]);
 
-    const onDocumentLoadSuccess = document => {
+    const onDocumentLoadSuccess = async document => {
+        const { info } = await document.getMetadata();
+        setPdfName(info.Title || file.name);
         console.log('Structure tree: ', document._pdfInfo.structureTree);
     };
     const onPageLoadSuccess = page => {
@@ -25,8 +33,10 @@ function Inspect(props) {
     };
 
     return (
-        <section className="inspect">
-            <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+        <section className={classNames('inspect', { _open: treeOpened })}>
+            <DrawerLayout open={treeOpened} title={LIST_HEADER} />
+            <Toolbar name={pdfName} isTreeOpened={treeOpened} onTreeToggle={onTreeToggle} />
+            <Document className="inspect__document" file={file} onLoadSuccess={onDocumentLoadSuccess}>
                 <Page pageNumber={pageNumber} onLoadSuccess={onPageLoadSuccess} />
             </Document>
         </section>

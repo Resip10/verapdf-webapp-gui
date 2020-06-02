@@ -15,6 +15,14 @@
   margin: 0 auto;
   padding: 75px 0 50px 0;
   box-sizing: border-box;
+
+  &.app-inspect {
+    padding-bottom: 0;
+
+    & + .app-footer {
+      display: none;
+    }
+  }
 }
 
 .app-link {

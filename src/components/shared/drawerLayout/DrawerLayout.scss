@@ -1,0 +1,15 @@
+@import "../../variables";
+@import "../../mixins";
+
+.drawer {
+  & > div {
+    top: 75px;
+    z-index: $top-element-index - 1;
+    width: $drawer-width;
+  }
+
+  &__header {
+    @include inspect-toolbar;
+    justify-content: space-between;
+  }
+}
